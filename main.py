@@ -1,8 +1,12 @@
+import sys
+import os.path
+
 VERSION = "v1.0.0"
 
 
 def main():
-    path = "./books/frankenstein.txt"
+    path = str(sys.argv[1])
+    check_path(path)
     text = read_text_from_file(path)
     word_count = get_word_count(text)
     char_dict = get_char_dict(text)
@@ -41,6 +45,11 @@ def generate_report(path, word_count, char_count_dict):
         print(f'=== Character "{k}" occurred {v} times')
 
     print("\n=== End of BookBot report")
+
+
+def check_path(path):
+    if not os.path.isfile(path):
+        raise Exception("ERROR: Path does not point to a .txt file.")
 
 
 main()
